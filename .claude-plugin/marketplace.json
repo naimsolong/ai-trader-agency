@@ -5,8 +5,8 @@
     "name": "naimsolong"
   },
   "metadata": {
-    "description": "A CEO-led AI Trader Agency — autonomous Market Analysis, Trade Execution, Risk Management, Research, and Portfolio Management agents with persistent memory and multi-agent coordination.",
-    "version": "1.0.0"
+    "description": "A CEO-led AI Trader Agency with Front Office, Middle Office, and Back Office agents — autonomous trading, analysis, risk, compliance, settlement, and portfolio management with persistent memory and multi-agent coordination.",
+    "version": "1.1.0"
   },
   "plugins": [
     {
@@ -15,8 +15,8 @@
         "source": "github",
         "repo": "naimsolong/ai-trader-agency"
       },
-      "description": "A CEO-led AI Trader Agency — autonomous Market Analysis, Trade Execution, Risk Management, Research, and Portfolio Management agents with persistent memory and multi-agent coordination.",
-      "version": "1.0.0",
+      "description": "A CEO-led AI Trader Agency with Front Office, Middle Office, and Back Office agents — autonomous trading, analysis, risk, compliance, settlement, and portfolio management with persistent memory and multi-agent coordination.",
+      "version": "1.1.0",
       "author": {
         "name": "naimsolong"
       },
@@ -31,6 +31,8 @@
         "market-analysis",
         "risk-management",
         "portfolio",
+        "compliance",
+        "settlement",
         "automation",
         "finance"
       ],
@@ -42,15 +44,23 @@
         "finance",
         "market-analysis",
         "risk-management",
+        "compliance",
         "orchestration"
       ],
       "skills": [
         "./skills/ceo",
-        "./skills/analyst",
-        "./skills/trader",
+        "./skills/technical-analyst",
+        "./skills/fundamental-analyst",
+        "./skills/dealer",
         "./skills/risk",
-        "./skills/researcher",
         "./skills/portfolio",
+        "./skills/compliance",
+        "./skills/audit",
+        "./skills/product-development",
+        "./skills/settlement",
+        "./skills/custody",
+        "./skills/finance",
+        "./skills/legal",
         "./skills/session-start",
         "./skills/memory-sync",
         "./skills/agency-status"

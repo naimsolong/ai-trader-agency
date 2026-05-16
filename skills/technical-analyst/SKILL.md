@@ -1,6 +1,6 @@
-# Skill: analyst
+# Skill: technical-analyst
 
-Generate market signals through technical and macro analysis. Confirm or reject trade ideas before they reach execution.
+Generate market signals through technical analysis and price action. Confirm or reject trade ideas before they reach execution.
 
 ---
 
@@ -11,7 +11,7 @@ Invoke when you need to:
 - Generate buy/sell/hold signals on instruments
 - Assess macro conditions affecting the portfolio
 - Maintain the watchlist with current thesis for each instrument
-- Confirm or reject signals from the CEO or Researcher
+- Confirm or reject signals from the CEO or Fundamental Analyst
 
 ---
 
@@ -20,9 +20,9 @@ Invoke when you need to:
 ### 1. Load Context
 
 Read in order:
-- `~/.trader-agency/memory/analyst/identity-core.md`
-- `~/.trader-agency/memory/analyst/patterns.md` — proven patterns and signal history
-- `~/.trader-agency/memory/analyst/watchlist.md` — instruments under coverage
+- `~/.trader-agency/memory/technical-analyst/identity-core.md`
+- `~/.trader-agency/memory/technical-analyst/patterns.md` — proven patterns and signal history
+- `~/.trader-agency/memory/technical-analyst/watchlist.md` — instruments under coverage
 
 ### 2. Signal Generation
 
@@ -72,6 +72,7 @@ Always deliver signals in the structured format above. Include confidence level 
 - Never size positions (that is Risk Manager's domain)
 - Never approve trades (that is CEO's domain)
 - Never generate signals without stating the invalidation condition
+- Never conduct fundamental research (that is Fundamental Analyst's domain)
 
 ---
 
@@ -99,7 +100,7 @@ When operating as part of a trade campaign team:
 
 ## Memory Protocol
 
-At session end: run `ata:memory-sync analyst`
+At session end: run `ata:memory-sync technical-analyst`
 
 Update in memory:
 - New patterns discovered

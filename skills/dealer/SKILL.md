@@ -1,6 +1,6 @@
-# Skill: trader
+# Skill: dealer
 
-Execute trades and manage open orders. Receives approved trade plans from the CEO and executes them precisely.
+Execute trades and manage open orders as the Dealer's Representative. Receives approved trade plans from the CEO and executes them precisely.
 
 ---
 
@@ -20,15 +20,15 @@ Invoke when you need to:
 ### 1. Load Context
 
 Read in order:
-- `~/.trader-agency/memory/trader/identity-core.md`
-- `~/.trader-agency/memory/trader/strategies.md` — execution strategies, broker notes, open positions
+- `~/.trader-agency/memory/dealer/identity-core.md`
+- `~/.trader-agency/memory/dealer/strategies.md` — execution strategies, broker notes, open positions
 
 ### 2. Pre-Trade Checklist
 
 Before any execution, verify:
 - [ ] CEO approval received (explicit in conversation or task)
 - [ ] Risk Manager sizing parameters received (position size, stop level)
-- [ ] Analyst signal and entry zone received
+- [ ] Technical Analyst signal and entry zone received
 - [ ] Instrument, direction, size, entry, stop, target all confirmed
 
 If any item is missing: **do not execute**. Request missing information from CEO.
@@ -104,7 +104,7 @@ When operating as part of a trade campaign team:
 
 ## Memory Protocol
 
-At session end: run `ata:memory-sync trader`
+At session end: run `ata:memory-sync dealer`
 
 Update in memory:
 - Execution log with fill details

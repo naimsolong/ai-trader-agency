@@ -53,15 +53,16 @@ For each new trade idea from user:
 
 ### 3. Spawn All Agents
 
-Spawn all 5 specialist agents **in parallel** using `Agent` with `team_name` set:
+Spawn all core specialist agents **in parallel** using `Agent` with `team_name` set:
 
-| Name | Skill | Role |
-|------|-------|------|
-| `analyst` | `ata:analyst` | Confirm or reject the technical signal |
-| `risk` | `ata:risk` | Size the position and enforce limits |
-| `trader` | `ata:trader` | Execute the approved trade plan |
-| `researcher` | `ata:researcher` | Provide fundamental context |
-| `portfolio` | `ata:portfolio` | Record position and track performance |
+| Name | Skill | Office | Role |
+|------|-------|--------|------|
+| `technical-analyst` | `ata:technical-analyst` | Front | Confirm or reject the technical signal |
+| `fundamental-analyst` | `ata:fundamental-analyst` | Front | Provide fundamental research context |
+| `dealer` | `ata:dealer` | Front | Execute the approved trade plan |
+| `portfolio` | `ata:portfolio` | Front | Record position and track performance |
+| `risk` | `ata:risk` | Middle | Size the position and enforce limits |
+| `compliance` | `ata:compliance` | Middle | Review trade for regulatory compliance |
 
 Each agent's opening prompt must include:
 - Campaign slug: `TC-<n>`
@@ -76,17 +77,22 @@ Wait for all agents to confirm readiness before proceeding.
 Steps 4a and 4b run **in parallel**. All others are sequential.
 
 #### 4a. Research (parallel with 4b — skip if instrument is well-known)
-- Send `TASK` to `researcher`: "Research [instrument]. Provide thesis, key catalysts, and macro alignment for a [direction] trade idea."
-- Wait for `TASK_DONE` from `researcher`
+- Send `TASK` to `fundamental-analyst`: "Research [instrument]. Provide thesis, key catalysts, and macro alignment for a [direction] trade idea."
+- Wait for `TASK_DONE` from `fundamental-analyst`
 
 #### 4b. Signal Confirmation (parallel with 4a)
-- Send `TASK` to `analyst`: "Analyze [instrument] for a [direction] trade. Provide structured signal with entry zone, target, stop, confidence, and invalidation criteria."
-- Wait for `GATE_READY` from `analyst`
+- Send `TASK` to `technical-analyst`: "Analyze [instrument] for a [direction] trade. Provide structured signal with entry zone, target, stop, confidence, and invalidation criteria."
+- Wait for `GATE_READY` from `technical-analyst`
 - Present signal to user
-- If approved → send `GATE_PASSED` to `analyst`
+- If approved → send `GATE_PASSED` to `technical-analyst`
 - If rejected → send `GATE_REJECTED` with feedback, wait for revised signal
 
-#### 4c. Risk Sizing (after 4b signal approved)
+#### 4c. Compliance Review (parallel with 4b, after 4a)
+- Send `TASK` to `compliance`: "Review [instrument] trade for compliance. Direction: [direction]. Confirm no regulatory constraints."
+- Wait for `TASK_DONE` from `compliance`
+- **If `compliance` returns `BLOCKER`: trade does not proceed. Inform user, close campaign.**
+
+#### 4d. Risk Sizing (after 4b and 4c both cleared)
 - Send `TASK` to `risk`: "Size the position. Instrument: [instrument]. Entry zone: [x]. Stop: [x]. Target: [x]. Portfolio exposure before this trade: [from portfolio snapshot]."
 - Wait for `GATE_READY` from `risk`
 - Present sizing to user
@@ -95,12 +101,12 @@ Steps 4a and 4b run **in parallel**. All others are sequential.
 
 **If `risk` verdict is `REJECTED`: the trade does not proceed. Inform user, close campaign.**
 
-#### 4d. Execution (after 4c approved)
-- Send `TASK` to `trader`: "Execute the approved trade. Instrument: [instrument]. Direction: [direction]. Size: [from risk]. Entry: [from analyst]. Stop: [from analyst]. Target: [from analyst]."
-- Wait for `TASK_DONE` from `trader`
+#### 4e. Execution (after 4d approved)
+- Send `TASK` to `dealer`: "Execute the approved trade. Instrument: [instrument]. Direction: [direction]. Size: [from risk]. Entry: [from technical-analyst]. Stop: [from technical-analyst]. Target: [from technical-analyst]."
+- Wait for `TASK_DONE` from `dealer`
 
-#### 4e. Portfolio Recording (after 4d done)
-- Send `TASK` to `portfolio`: "Record new position from TC-<n>. [Pass full execution report from trader.]"
+#### 4f. Portfolio Recording (after 4e done)
+- Send `TASK` to `portfolio`: "Record new position from TC-<n>. [Pass full execution report from dealer.]"
 - Wait for `TASK_DONE` from `portfolio`
 
 ### 5. Campaign Close & Cleanup
