@@ -1,0 +1,60 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-marketplace.json",
+  "name": "ai-trader-agency",
+  "owner": {
+    "name": "naimsolong"
+  },
+  "metadata": {
+    "description": "A CEO-led AI Trader Agency — autonomous Market Analysis, Trade Execution, Risk Management, Research, and Portfolio Management agents with persistent memory and multi-agent coordination.",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "ata",
+      "source": {
+        "source": "github",
+        "repo": "naimsolong/ai-trader-agency"
+      },
+      "description": "A CEO-led AI Trader Agency — autonomous Market Analysis, Trade Execution, Risk Management, Research, and Portfolio Management agents with persistent memory and multi-agent coordination.",
+      "version": "1.0.0",
+      "author": {
+        "name": "naimsolong"
+      },
+      "homepage": "https://github.com/naimsolong/ai-trader-agency",
+      "repository": "https://github.com/naimsolong/ai-trader-agency",
+      "license": "MIT",
+      "category": "productivity",
+      "keywords": [
+        "trading",
+        "ai-agents",
+        "orchestration",
+        "market-analysis",
+        "risk-management",
+        "portfolio",
+        "automation",
+        "finance"
+      ],
+      "tags": [
+        "trading",
+        "claude",
+        "ai",
+        "automation",
+        "finance",
+        "market-analysis",
+        "risk-management",
+        "orchestration"
+      ],
+      "skills": [
+        "./skills/ceo",
+        "./skills/analyst",
+        "./skills/trader",
+        "./skills/risk",
+        "./skills/researcher",
+        "./skills/portfolio",
+        "./skills/session-start",
+        "./skills/memory-sync",
+        "./skills/agency-status"
+      ]
+    }
+  ]
+}
